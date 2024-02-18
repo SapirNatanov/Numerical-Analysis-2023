@@ -43,19 +43,25 @@ def forward_substitution(mat):
 
         # if a principal diagonal element is zero,it denotes that matrix is singular,
         # and will lead to a division-by-zero later.
-        if not mat[pivot_row][k]:
+        if not mat[pivot_row][k]: #if mat[pivot_rov][k] == 0
             return k  # Matrix is singular
 
         # Swap the current row with the pivot row
         if pivot_row != k:
             swap_row(mat, k, pivot_row)
         # End Partial Pivoting
-
-        for u in range(N):
-            if not round(mat[u][u], 4):
-                mat[u][u] = 0
-                print(f"matrix: \n{np.array(mat)}\n")
+        for i in range(N):
+            if mat[i][i] == 0:
+                pass
+            elif not round(mat[i][i], 4):
+                mat[i][i] = 0
                 return N-1
+
+        # for u in range(N):
+        #     if not round(mat[u][u], 4):
+        #         mat[u][u] = 0
+        #         print(f"matrix: \n{np.array(mat)}\n")
+        #         return N-1
 
         for z in range(k, N):
             mat[k][z+1] /= mat[k][k]
@@ -82,6 +88,12 @@ def forward_substitution(mat):
         # for z in range(k, N):
         #     mat[k][z+1] /= mat[k][k]
         # mat[k][k] /= mat[k][k]
+
+    # for u in range(N):
+    #     if not round(mat[u][u], 4):
+    #         mat[u][u] = 0
+    #         print(f"matrix: \n{np.array(mat)}\n")
+    #         return N-1
 
     mat[N-1][N] /= mat[N-1][N-1]
     mat[N-1][N-1] /= mat[N-1][N-1]
@@ -110,13 +122,17 @@ def backward_substitution(mat):
 
 if __name__ == '__main__':
 
-    A_b = [[1, 2, 3, 4, 5],
-           [2, 3, 4, 5, 1],
-           [8, 8, 8, 8, 1],
-           [24, 15, 22, 1, 8]]
+    # A_b = [[1, 2, 3, 4, 5],
+    #        [2, 3, 4, 5, 1],
+    #        [8, 8, 8, 8, 1],
+    #        [24, 15, 22, 1, 8]]
 
     #A_b = [[0.913, 0.659, 0.254],
     #      [0.457, 0.330, 0.127]]
+
+    A_b = [[2, 3, 0, 5],
+           [3, 4, 5, 1],
+           [8, 8, 3, 1]]
 
     np.set_printoptions(suppress=True, precision=4)
 
